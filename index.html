@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine · subtle style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>you & me · valentine</title>
     <style>
         * {
             margin: 0;
@@ -12,248 +12,310 @@
         }
 
         body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #180b12 0%, #2e1a25 40%, #4f2c3a 100%);
-            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
+            background: linear-gradient(165deg, #fce4ec 0%, #ffe9f3 40%, #ffd9e8 100%);
+            font-family: 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            min-height: 100vh;
+            padding: 0 0 40px 0;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* --- main content container with barely-there text --- */
-        .valentine-message {
-            text-align: center;
-            z-index: 10;
-            backdrop-filter: blur(1px);
-            padding: 1.2rem 1.8rem;
-            border-radius: 60px 60px 30px 30px;
-            background: rgba(255, 240, 245, 0.03);
-            border: 1px solid rgba(255, 188, 217, 0.08);
-            box-shadow: 0 15px 40px -15px rgba( -moz-element(), 0.3);
-            margin: 20px 10px 10px 10px;
-        }
-
-        /* title — extremely low opacity, almost whispers */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: rgba(255, 220, 235, 0.25);
-            text-shadow: 0 0 18px #ff99bb88, 0 0 40px #ff337788;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            backdrop-filter: blur(2px);
-        }
-
-        /* subtitle also barely there, elegant */
-        .soft-words {
-            font-size: 1.2rem;
-            color: rgba(255, 210, 225, 0.3);
-            text-shadow: 0 0 15px #ffa5c3aa;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            display: inline-block;
-            margin-top: 5px;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 188, 217, 0.1);
-        }
-
-        /* image gallery — dreamy & stylish */
-        .gallery {
+        /* main container – mobile friendly width */
+        .wrapper {
+            width: 100%;
+            max-width: 460px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 18px;
-            margin: 30px 0 20px;
-            padding: 10px;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px 30px;
         }
 
-        .gallery img {
-            width: 180px;
-            max-width: 42vw;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 38% 62% 42% 58% / 56% 44% 56% 44%;
-            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 210, 230, 0.15), 0 0 40px #ff99bb40;
-            transition: 0.3s ease-in-out;
-            filter: saturate(1.05) brightness(1.02);
+        /* romantic header – soft & shiny */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #c2185b;
+            text-shadow: 0 0 8px #ffb6c1, 0 0 20px #ff99cc;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            text-align: center;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: rgba(255, 245, 250, 0.5);
+            padding: 8px 22px;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 5px 20px rgba(240, 128, 160, 0.2);
         }
 
-        .gallery img:hover {
-            transform: scale(1.02);
-            border-radius: 46% 54% 38% 62% / 48% 42% 58% 52%;
-            box-shadow: 0 30px 45px -8px black, 0 0 0 3px rgba(255, 180, 210, 0.4), 0 0 70px #ff70a0;
+        /* image container – uncropped, full visibility */
+        .photo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            margin: 18px 0 20px;
         }
 
-        /* --- hidden audio (kept as requested) --- */
-        audio {
-            display: none;
+        /* each image card – no cropping, show full original ratio */
+        .photo-card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 36px 36px 36px 36px;
+            padding: 14px 14px 8px 14px;
+            box-shadow: 0 20px 30px -8px rgba(190, 70, 120, 0.4), 0 0 0 1.5px #ffb6d1 inset, 0 0 0 3px #ffeef5 inset;
+            backdrop-filter: blur(4px);
         }
 
-        /* ---- FLOATING HEARTS (more refined, gradient + duo-tone) ---- */
-        .heart {
-            position: fixed;
-            bottom: -10vh;
-            pointer-events: none;
-            user-select: none;
-            z-index: 25;
-            filter: drop-shadow(0 0 12px rgba(255, 100, 150, 0.8));
-            opacity: 0.7;
-            will-change: transform, opacity;
-            font-size: 24px; /* default, will be overridden by style */
-            color: #ffb3c6;  /* fallback */
-            background: linear-gradient(45deg, #ff8ab3, #ffc1d4);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px #ff99bb;
+        .photo-card img {
+            width: 100%;
+            height: auto;                /* maintain natural aspect */
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffffffaa;
+            object-fit: contain;         /* ensures full image, no crop */
+            background: #ffddee;          /* soft background while loading */
         }
 
-        /* subtle additional floating orbs (very faint) */
-        .glow-blur {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 150, 200, 0.15), transparent 70%);
-            filter: blur(40px);
-            z-index: 1;
-            top: 10%;
-            left: 5%;
+        /* fallback if images missing */
+        .photo-card img[src=""] {
+            opacity: 0.3;
+            min-height: 200px;
+            background: #fccfdd;
         }
 
-        .glow-blur2 {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 120, 200, 0.1), transparent 75%);
-            filter: blur(60px);
-            z-index: 1;
-            bottom: 0;
-            right: 0;
-        }
-
-        /* keep everything above background but under hearts */
-        .valentine-message, .gallery {
-            position: relative;
-            z-index: 15;
-        }
-
-        /* optional very subtle line to frame */
-        hr {
-            width: 120px;
+        /* stylish button – click to reveal caption */
+        .surprise-btn {
+            background: linear-gradient(145deg, #ff88b0, #ffb3c6);
             border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 200, 220, 0.3), transparent);
-            margin: 8px 0 5px;
+            padding: 18px 38px;
+            border-radius: 50px;
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #4a1e2f;
+            text-shadow: 0 1px 3px #ffeef4;
+            letter-spacing: 1px;
+            box-shadow: 0 20px 25px -8px #e75480, 0 5px 0 0 #b3436b, 0 0 20px #ffa5c3;
+            margin: 25px 0 15px;
+            transition: 0.2s ease;
+            cursor: pointer;
+            width: fit-content;
+            backdrop-filter: blur(10px);
+            border: 2px solid #ffffffcc;
+        }
+
+        .surprise-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 10px 20px -5px #d96f92, 0 2px 0 0 #9e3d5e, 0 0 30px #ffa5c3;
+        }
+
+        /* hidden caption (initially invisible) */
+        .hidden-caption {
+            background: rgba(255, 220, 240, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 26px 24px;
+            border-radius: 80px 80px 50px 50px;
+            margin: 20px 0 15px;
+            font-size: 1.45rem;
+            line-height: 1.5;
+            color: #2f0f1c;
+            text-align: center;
+            font-weight: 400;
+            font-family: 'Georgia', 'cursive', serif;
+            box-shadow: 0 25px 35px -15px #b3466a, 0 0 0 2px #ffe5f0 inset;
+            width: 100%;
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s ease;
+            pointer-events: none;
+            border: 2px solid white;
+        }
+
+        /* when revealed (class added by js) */
+        .hidden-caption.reveal {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;   /* optional, but can be selected */
+        }
+
+        /* soft floating hearts (delicate) */
+        .heart-float {
+            position: fixed;
+            bottom: -20px;
+            color: #ff9eb5;
+            font-size: 22px;
+            opacity: 0.5;
+            animation: rise 9s linear infinite;
+            z-index: 25;
+            filter: drop-shadow(0 0 10px #ffb7c5);
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-120vh) rotate(10deg); opacity: 0; }
+        }
+
+        /* romantic micro line */
+        .tiny-note {
+            font-size: 0.9rem;
+            color: #bd7b96;
+            opacity: 0.8;
+            margin: 10px 0 5px;
+            letter-spacing: 2px;
+        }
+
+        /* smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* caption anchor for scroll */
+        #love-note-anchor {
+            scroll-margin-top: 20px;
+            width: 100%;
+        }
+
+        /* mobile touch optimizations */
+        button, .surprise-btn {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fbaac3, transparent);
+            width: 70%;
+            margin: 12px 0;
         }
     </style>
 </head>
 <body>
-    <!-- two large soft light orbs behind for depth -->
-    <div class="glow-blur"></div>
-    <div class="glow-blur2"></div>
+    <div class="wrapper">
+        <h1>💘 be my Valentine 💘</h1>
 
-    <!-- main minimal text (almost invisible, pure style) -->
-    <div class="valentine-message">
-        <h1>❤️ 14.02 ❤️</h1>
+        <!-- Image section – full images, no crop, mobile sized -->
+        <div class="photo-section">
+            <div class="photo-card">
+                <img src="photo1.jpeg" alt="us · moment 1" onerror="this.style.opacity='0.5'; this.alt='image not found'">
+            </div>
+        </div>
+
+        <!-- Button that triggers reveal + smooth scroll -->
+        <button class="surprise-btn" id="revealButton">✨ click here ✨</button>
+
+        <!-- This is the anchor + hidden caption container -->
+        <div id="love-note-anchor"></div>
+        <div class="hidden-caption" id="specialCaption">
+            “To the one who makes my heart smile every day—thank you for choosing me and being with me 💕<br>Happy Valentine’s Day!”
+        </div>
+
+        <!-- Second image (you can place another, same uncropped style) -->
+        <div class="photo-section" style="margin-top: 5px;">
+            <div class="photo-card">
+                <img src="photo2.jpeg" alt="together" onerror="this.style.opacity='0.5';">
+            </div>
+        </div>
+
         <hr>
-        <div class="soft-words">lovedrifts</div>
-        <div class="soft-words" style="font-size:0.9rem; margin-top:6px;">you + me · still</div>
+        <div class="tiny-note">❤️ forever yours ❤️</div>
     </div>
 
-    <!-- image frame (photo1, photo2) -->
-    <div class="gallery">
-        <img src="photo1.jpeg" alt="romantic moment" onerror="this.style.display='none'">
-        <img src="photo2.jpeg" alt="us" onerror="this.style.display='none'">
-    </div>
-
-    <!-- background music (autoplay loop, hidden) -->
-    <audio autoplay loop>
+    <!-- background music (as before, autoplay muted? we keep it) -->
+    <audio autoplay loop playsinline style="display: none;">
         <source src="music.mp3" type="audio/mpeg">
-        <!-- fallback: if browser blocks autoplay, it's okay, no visual change -->
+        <!-- silent fallback if browser blocks autoplay -->
     </audio>
 
-    <!-- script for floating gradient hearts + extra sparkle -->
     <script>
         (function() {
-            // ---- elegant heart generator ----
-            const heartContainer = document.body;
+            // --- heart floating generator (kept gentle) ---
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-float');
+                const hearts = ['❤️', '💖', '💗', '💕', '💓', '🌸', '🌷'];
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (12 + Math.random() * 26) + 'px';
+                heart.style.animationDuration = (5 + Math.random() * 6) + 's';
+                heart.style.opacity = 0.2 + Math.random() * 0.5;
+                document.body.appendChild(heart);
 
-            function generateHeart() {
-                const heartEl = document.createElement('div');
-                heartEl.classList.add('heart');
-
-                // randomize style: size, left, duration, slight variations in gradient color
-                const size = 12 + Math.random() * 26; // between 12px and 38px
-                const leftPos = Math.random() * 100;  // vw
-                const duration = 5 + Math.random() * 5; // 5-10 sec float
-                const delay = Math.random() * 2; // slight delay variation
-
-                // choose heart character (some are more fancy)
-                const heartsArray = ['❤️', '🧡', '💖', '💗', '💓', '💕', '♥️'];
-                const randomHeart = heartsArray[Math.floor(Math.random() * heartsArray.length)];
-
-                heartEl.innerHTML = randomHeart;
-                heartEl.style.left = leftPos + 'vw';
-                heartEl.style.fontSize = size + 'px';
-                heartEl.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
-                heartEl.style.opacity = 0.5 + Math.random() * 0.4; // max 0.9
-
-                // extra style to make each heart slightly unique: background gradient shift
-                const hue1 = 330 + Math.random() * 30; // 330-360
-                const hue2 = 340 + Math.random() * 30; // 340-370 (but capped)
-                heartEl.style.background = `linear-gradient(45deg, hsl(${hue1}, 90%, 75%), hsl(${hue2}, 85%, 80%))`;
-                heartEl.style.backgroundClip = 'text';
-                heartEl.style.webkitBackgroundClip = 'text';
-                heartEl.style.webkitTextFillColor = 'transparent';
-
-                // attach to body
-                document.body.appendChild(heartEl);
-
-                // remove after it finishes its trip (duration + small buffer)
                 setTimeout(() => {
-                    if (heartEl && heartEl.remove) heartEl.remove();
-                }, duration * 1000 + 500);
+                    heart.remove();
+                }, 12000);
             }
+            setInterval(createHeart, 500);
 
-            // start floating hearts (slightly slower than original for elegance)
-            setInterval(generateHeart, 550);
+            // --- button: reveal caption + scroll to it ---
+            const btn = document.getElementById('revealButton');
+            const caption = document.getElementById('specialCaption');
 
-            // also define the floatUp animation dynamically (already in style, but we can ensure it)
-            const styleSheet = document.createElement("style");
-            styleSheet.innerHTML = `
-                @keyframes floatUp {
-                    0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
-                    100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; }
+            btn.addEventListener('click', function() {
+                // 1. add 'reveal' class to make caption visible
+                caption.classList.add('reveal');
+
+                // 2. smooth scroll to the caption container (use anchor)
+                const anchor = document.getElementById('love-note-anchor');
+                anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // 3. optional: subtle haptic feedback (if supported)
+                if (window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(20); // tiny tap
                 }
-            `;
-            document.head.appendChild(styleSheet);
+
+                // 4. a little spark effect after scroll (optional extra)
+                btn.style.transform = 'scale(0.98)';
+                setTimeout(() => { btn.style.transform = ''; }, 200);
+            });
+
+            // ensure images don't appear cropped: object-fit: contain already does.
+            // For even more safety, we can add a background while images load.
+            // preload / error handling: if images 404, we keep alt with pretty background.
+            const imgs = document.querySelectorAll('img');
+            imgs.forEach(img => {
+                // if image fails to load, keep it subtle but not broken
+                img.addEventListener('error', function(e) {
+                    this.style.background = '#ffd0df';
+                    this.style.minHeight = '200px';
+                    this.style.padding = '30px 0';
+                    this.alt = this.alt || 'lovely memory';
+                    // we can even set a fallback content but image is fine as background
+                });
+            });
+
+            // optional: preload to avoid layout shift – but images keep aspect
+            // we also set background soft pink behind images
         })();
 
-        // small extra: if images fail to load, we keep gallery stylish without broken icons
-        window.addEventListener('load', function() {
-            document.querySelectorAll('img').forEach(img => {
-                if (img.naturalWidth === 0) {
-                    // image missing – replace with subtle transparent placeholder
-                    img.style.display = 'none'; // or keep them hidden
-                }
-            });
+        // small extra: disable context menu on images? (optional, to preserve)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', (e) => e.preventDefault());
         });
     </script>
 
-    <!-- tiny touch: two static hearts in bottom corner, very faint -->
-    <div style="position: fixed; bottom: 6px; right: 12px; opacity: 0.15; font-size: 22px; color: #ffc0cb; z-index: 30;">❤️</div>
-    <div style="position: fixed; bottom: 20px; left: 12px; opacity: 0.1; font-size: 30px; color: #ffc0d0; z-index: 30; transform: rotate(-5deg);">❤️</div>
+    <!-- ensure that even if music autoplay fails, nothing breaks -->
+    <noscript>💕</noscript>
 
-    <!-- subtle credit / micro text (blends) -->
-    <div style="position: fixed; bottom: 3px; left: 0; right: 0; text-align: center; font-size: 9px; color: rgba(255,220,240,0.2); letter-spacing: 2px; z-index: 40;">✦ ever ✦</div>
+    <!-- inline style to force object-fit for all image scenarios -->
+    <style>
+        /* guarantee full image without cropping, even if some weird attribute */
+        .photo-card img {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: auto !important;
+            background-color: #ffddea;
+        }
+        /* for very old browser, but contain is safe */
+    </style>
 
+    <!-- tiny additional anchor for better scroll position -->
+    <div style="height: 5px;"></div>
 </body>
 </html>
