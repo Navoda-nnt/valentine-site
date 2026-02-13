@@ -1,90 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine · subtle style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body{
- margin:0;
- background:linear-gradient(135deg,#ffd6e7,#ffeaf4);
- text-align:center;
- font-family:Arial, sans-serif;
- overflow-x:hidden;
-}
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #180b12 0%, #2e1a25 40%, #4f2c3a 100%);
+            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-/* Romantic glowing title */
-h1{
- color:#ff2e7a;
- font-size:40px;
- text-shadow:0 0 10px #ff99bb, 0 0 20px #ff66a3;
- margin-top:40px;
-}
+        /* --- main content container with barely-there text --- */
+        .valentine-message {
+            text-align: center;
+            z-index: 10;
+            backdrop-filter: blur(1px);
+            padding: 1.2rem 1.8rem;
+            border-radius: 60px 60px 30px 30px;
+            background: rgba(255, 240, 245, 0.03);
+            border: 1px solid rgba(255, 188, 217, 0.08);
+            box-shadow: 0 15px 40px -15px rgba( -moz-element(), 0.3);
+            margin: 20px 10px 10px 10px;
+        }
 
-/* Text style */
-p{
- font-size:18px;
- color:#444;
- padding:0 20px;
-}
+        /* title — extremely low opacity, almost whispers */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: rgba(255, 220, 235, 0.25);
+            text-shadow: 0 0 18px #ff99bb88, 0 0 40px #ff337788;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            backdrop-filter: blur(2px);
+        }
 
-/* Images mobile friendly */
-img{
- width:80%;
- max-width:260px;
- border-radius:20px;
- margin:12px;
- box-shadow:0 0 15px rgba(0,0,0,0.2);
-}
+        /* subtitle also barely there, elegant */
+        .soft-words {
+            font-size: 1.2rem;
+            color: rgba(255, 210, 225, 0.3);
+            text-shadow: 0 0 15px #ffa5c3aa;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 5px;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 188, 217, 0.1);
+        }
 
-/* Floating hearts */
-.heart{
- position:fixed;
- bottom:-20px;
- color:#ff4d88;
- font-size:20px;
- animation:floatUp 6s linear infinite;
-}
+        /* image gallery — dreamy & stylish */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 0 20px;
+            padding: 10px;
+        }
 
-@keyframes floatUp{
- 0%{transform:translateY(0);opacity:1;}
- 100%{transform:translateY(-110vh);opacity:0;}
-}
-</style>
+        .gallery img {
+            width: 180px;
+            max-width: 42vw;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 38% 62% 42% 58% / 56% 44% 56% 44%;
+            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 210, 230, 0.15), 0 0 40px #ff99bb40;
+            transition: 0.3s ease-in-out;
+            filter: saturate(1.05) brightness(1.02);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.02);
+            border-radius: 46% 54% 38% 62% / 48% 42% 58% 52%;
+            box-shadow: 0 30px 45px -8px black, 0 0 0 3px rgba(255, 180, 210, 0.4), 0 0 70px #ff70a0;
+        }
+
+        /* --- hidden audio (kept as requested) --- */
+        audio {
+            display: none;
+        }
+
+        /* ---- FLOATING HEARTS (more refined, gradient + duo-tone) ---- */
+        .heart {
+            position: fixed;
+            bottom: -10vh;
+            pointer-events: none;
+            user-select: none;
+            z-index: 25;
+            filter: drop-shadow(0 0 12px rgba(255, 100, 150, 0.8));
+            opacity: 0.7;
+            will-change: transform, opacity;
+            font-size: 24px; /* default, will be overridden by style */
+            color: #ffb3c6;  /* fallback */
+            background: linear-gradient(45deg, #ff8ab3, #ffc1d4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px #ff99bb;
+        }
+
+        /* subtle additional floating orbs (very faint) */
+        .glow-blur {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 150, 200, 0.15), transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+            top: 10%;
+            left: 5%;
+        }
+
+        .glow-blur2 {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 120, 200, 0.1), transparent 75%);
+            filter: blur(60px);
+            z-index: 1;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* keep everything above background but under hearts */
+        .valentine-message, .gallery {
+            position: relative;
+            z-index: 15;
+        }
+
+        /* optional very subtle line to frame */
+        hr {
+            width: 120px;
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 200, 220, 0.3), transparent);
+            margin: 8px 0 5px;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- two large soft light orbs behind for depth -->
+    <div class="glow-blur"></div>
+    <div class="glow-blur2"></div>
 
-<h1>Happy Valentine’s Day ❤️</h1>
+    <!-- main minimal text (almost invisible, pure style) -->
+    <div class="valentine-message">
+        <h1>❤️ 14.02 ❤️</h1>
+        <hr>
+        <div class="soft-words">lovedrifts</div>
+        <div class="soft-words" style="font-size:0.9rem; margin-top:6px;">you + me · still</div>
+    </div>
 
-<p>
-You are my favorite person in the world.<br>
-Thank you for being in my life 💕
-</p>
+    <!-- image frame (photo1, photo2) -->
+    <div class="gallery">
+        <img src="photo1.jpeg" alt="romantic moment" onerror="this.style.display='none'">
+        <img src="photo2.jpeg" alt="us" onerror="this.style.display='none'">
+    </div>
 
-<img src="photo1.jpeg">
-<img src="photo2.jpeg">
+    <!-- background music (autoplay loop, hidden) -->
+    <audio autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+        <!-- fallback: if browser blocks autoplay, it's okay, no visual change -->
+    </audio>
 
-<!-- Background music -->
-<audio autoplay loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+    <!-- script for floating gradient hearts + extra sparkle -->
+    <script>
+        (function() {
+            // ---- elegant heart generator ----
+            const heartContainer = document.body;
 
-<script>
-/* Floating hearts generator */
-function createHeart(){
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML="❤";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(10+Math.random()*20)+"px";
-  heart.style.animationDuration=(4+Math.random()*3)+"s";
-  document.body.appendChild(heart);
+            function generateHeart() {
+                const heartEl = document.createElement('div');
+                heartEl.classList.add('heart');
 
-  setTimeout(()=>{heart.remove();},6000);
-}
-setInterval(createHeart,400);
-</script>
+                // randomize style: size, left, duration, slight variations in gradient color
+                const size = 12 + Math.random() * 26; // between 12px and 38px
+                const leftPos = Math.random() * 100;  // vw
+                const duration = 5 + Math.random() * 5; // 5-10 sec float
+                const delay = Math.random() * 2; // slight delay variation
+
+                // choose heart character (some are more fancy)
+                const heartsArray = ['❤️', '🧡', '💖', '💗', '💓', '💕', '♥️'];
+                const randomHeart = heartsArray[Math.floor(Math.random() * heartsArray.length)];
+
+                heartEl.innerHTML = randomHeart;
+                heartEl.style.left = leftPos + 'vw';
+                heartEl.style.fontSize = size + 'px';
+                heartEl.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
+                heartEl.style.opacity = 0.5 + Math.random() * 0.4; // max 0.9
+
+                // extra style to make each heart slightly unique: background gradient shift
+                const hue1 = 330 + Math.random() * 30; // 330-360
+                const hue2 = 340 + Math.random() * 30; // 340-370 (but capped)
+                heartEl.style.background = `linear-gradient(45deg, hsl(${hue1}, 90%, 75%), hsl(${hue2}, 85%, 80%))`;
+                heartEl.style.backgroundClip = 'text';
+                heartEl.style.webkitBackgroundClip = 'text';
+                heartEl.style.webkitTextFillColor = 'transparent';
+
+                // attach to body
+                document.body.appendChild(heartEl);
+
+                // remove after it finishes its trip (duration + small buffer)
+                setTimeout(() => {
+                    if (heartEl && heartEl.remove) heartEl.remove();
+                }, duration * 1000 + 500);
+            }
+
+            // start floating hearts (slightly slower than original for elegance)
+            setInterval(generateHeart, 550);
+
+            // also define the floatUp animation dynamically (already in style, but we can ensure it)
+            const styleSheet = document.createElement("style");
+            styleSheet.innerHTML = `
+                @keyframes floatUp {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+                    100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+        })();
+
+        // small extra: if images fail to load, we keep gallery stylish without broken icons
+        window.addEventListener('load', function() {
+            document.querySelectorAll('img').forEach(img => {
+                if (img.naturalWidth === 0) {
+                    // image missing – replace with subtle transparent placeholder
+                    img.style.display = 'none'; // or keep them hidden
+                }
+            });
+        });
+    </script>
+
+    <!-- tiny touch: two static hearts in bottom corner, very faint -->
+    <div style="position: fixed; bottom: 6px; right: 12px; opacity: 0.15; font-size: 22px; color: #ffc0cb; z-index: 30;">❤️</div>
+    <div style="position: fixed; bottom: 20px; left: 12px; opacity: 0.1; font-size: 30px; color: #ffc0d0; z-index: 30; transform: rotate(-5deg);">❤️</div>
+
+    <!-- subtle credit / micro text (blends) -->
+    <div style="position: fixed; bottom: 3px; left: 0; right: 0; text-align: center; font-size: 9px; color: rgba(255,220,240,0.2); letter-spacing: 2px; z-index: 40;">✦ ever ✦</div>
 
 </body>
 </html>
